@@ -2,7 +2,7 @@
 
 **Course:** Web Design 1: Concepts & Coding
 **Week:** 9
-**Time:** ~30 minutes, in class
+**Time:** most of class
 
 ---
 
