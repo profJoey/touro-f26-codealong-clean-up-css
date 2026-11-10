@@ -1,0 +1,158 @@
+/* STEP 2: add your :root custom properties here */
+
+/* === RESET === */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* === BASE TYPE === */
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: #1f2937;
+  background: #ffffff;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Georgia, serif;
+  margin-bottom: 13px;
+}
+
+p {
+  max-width: 65ch;
+  margin-bottom: 15px;
+}
+
+/* STEP 1: how many blues can you find? */
+a {
+  color: #1d4fd9;
+}
+
+/* STEP 8: this hides the focus ring. Tab through the page and see. */
+a,
+.button {
+  outline: none;
+}
+
+/* === HEADER === */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 22px;
+  background: #1d4ed8;
+}
+
+.logo {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 17px;
+}
+
+.site-header nav a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* === BUTTONS === */
+.button {
+  display: inline-block;
+  background: #1e4fd8;
+  color: #ffffff;
+  padding: 11px 23px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 14px;
+}
+
+/* === PAGE GRID === */
+.page {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 19px;
+  padding: 25px;
+}
+
+/* === SECTIONS === */
+section {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 21px;
+}
+
+.hero,
+.how,
+.signup {
+  grid-column: 1 / -1;
+}
+
+.feature {
+  grid-column: span 4;
+}
+
+.feature h3 {
+  color: #1c4ed7;
+  margin-bottom: 7px;
+}
+
+/* STEP 6: is this readable? */
+.tagline {
+  color: #a3a3a3;
+  font-size: 1.15rem;
+}
+
+.hero img {
+  margin-top: 12px;
+  border-radius: 6px;
+}
+
+.signup {
+  background: #eff6ff;
+  text-align: center;
+}
+
+.signup p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* === FOOTER === */
+.site-footer {
+  padding: 20px 25px;
+  color: #b0b0b0;
+  font-size: 0.875rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 800px) {
+  .feature {
+    grid-column: 1 / -1;
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+  }
+}
