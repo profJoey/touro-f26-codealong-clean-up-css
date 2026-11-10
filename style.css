@@ -12,11 +12,7 @@ html {
   scroll-behavior: smooth;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+/* STEP 7: add your img rule here */
 
 /* === BASE TYPE === */
 body {
@@ -43,7 +39,7 @@ a {
   color: #1d4fd9;
 }
 
-/* STEP 8: this hides the focus ring. Tab through the page and see. */
+/* STEP 11: this hides the focus ring. Tab through the page and see. */
 a,
 .button {
   outline: none;
@@ -109,6 +105,7 @@ section {
 
 .feature {
   grid-column: span 4;
+  margin-right: 17px;
 }
 
 .feature h3 {
@@ -116,13 +113,15 @@ section {
   margin-bottom: 7px;
 }
 
-/* STEP 6: is this readable? */
+/* STEP 9: is this readable? */
 .tagline {
   color: #a3a3a3;
   font-size: 1.15rem;
 }
 
 .hero img {
+  display: block;
+  height: 600px;
   margin-top: 12px;
   border-radius: 6px;
 }

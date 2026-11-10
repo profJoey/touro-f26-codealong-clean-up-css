@@ -12,12 +12,13 @@ Your page has a grid, flexbox, a media query, and real content. It works. Tonigh
 
 Most pages at this point have the same problems: the same blue typed in five slightly different ways, margins of `13px` here and `20px` there, links you can't see when you tab to them, and gray text that's hard to read. None of these break the page. All of them make it feel unfinished.
 
-We'll practice four tools on a small page:
+We'll practice five tools on a small page:
 
 1. **Custom properties**: name your colors and spacing once, then reuse them.
 2. **A spacing scale**: a few sizes instead of random numbers.
-3. **Contrast**: checking that text is actually readable.
-4. **Focus styles**: making the page work with a keyboard.
+3. **Images that fit**: let images size themselves instead of forcing a height.
+4. **Contrast**: checking that text is actually readable.
+5. **Focus styles**: making the page work with a keyboard.
 
 Then we'll run an accessibility audit and read the results together.
 
@@ -127,11 +128,74 @@ Rule of thumb: **small things inside a box get small spacing, space between big 
 
 > **Where's `gap`?** Remember from last week: on a grid or flex container, use `gap` instead of margins on the children. Use your spacing variables there too.
 
+### Step 6 — Remove leftover margins
+
+Look at the three feature boxes. The right edge of the last box doesn't line up with the hero above it.
+
+Find the `.feature` rule:
+
+```css
+.feature {
+  grid-column: span 4;
+  margin-right: 17px;
+}
+```
+
+The `.page` grid already puts a `gap` between the boxes. The `margin-right` is left over from before the page was a grid, so now the spacing is doubled and the last box comes up short. Delete the `margin-right` line.
+
+**You should see:** all three feature boxes line up with the hero's right edge.
+
+> **When you switch something to flex or grid, look for leftover margins on the children.** `gap` replaces them. If you keep both, the spacing doubles.
+
 ---
 
-## Part 3 — Contrast
+## Part 3 — Images that fit
 
-### Step 6 — Check the gray text
+### Step 7 — The one image rule every page needs
+
+Make your browser window narrow, about phone width.
+
+**You should see:** the hero image sticks out past the right edge and the page scrolls sideways. An image shows at its full size (this one is 1200px wide) unless you tell it otherwise.
+
+Where the comment says `STEP 7`, near the top of `style.css`, add:
+
+```css
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+```
+
+- `max-width: 100%` means "never wider than your container."
+- `height: auto` keeps the image's shape when it shrinks.
+- `display: block` removes a small gap that browsers leave under images.
+
+Put this rule at the top of every project, next to `:root`.
+
+### Step 8 — Take out the fixed height
+
+The image fits now, but it looks stretched. Find `.hero img`:
+
+```css
+.hero img {
+  display: block;
+  height: 600px;
+  ...
+}
+```
+
+`height: 600px` overrides your `height: auto`. As the image gets narrower it stays 600px tall, so the picture gets squished. Delete the `height` line (and the extra `display: block`, since your `img` rule handles that now).
+
+**You should see:** the image keeps its shape at every window width.
+
+> **Don't set a fixed `height` on images or sections.** Let the content decide how tall the box is. If you need an image to be a certain shape, use `aspect-ratio: 16 / 9;` with `object-fit: cover;` instead of a pixel height.
+
+---
+
+## Part 4 — Contrast
+
+### Step 9 — Check the gray text
 
 Find the `.tagline` paragraph under the hero. It's light gray (`#a3a3a3`) on white.
 
@@ -141,7 +205,7 @@ Find the `.tagline` paragraph under the hero. It's light gray (`#a3a3a3`) on whi
 
 **You should see:** around **2.5**, with a ✗. Body text needs at least **4.5** to pass.
 
-### Step 7 — Fix it
+### Step 10 — Fix it
 
 Change the tagline color to your muted variable:
 
@@ -157,15 +221,15 @@ Check the contrast ratio again. It should now pass.
 
 ---
 
-## Part 4 — Focus styles
+## Part 5 — Focus styles
 
-### Step 8 — Put the mouse down
+### Step 11 — Put the mouse down
 
 Click in the address bar, then press **Tab** over and over. Watch the page.
 
 **You should see:** you can't tell where you are. The starter CSS has `outline: none` on links and buttons, which hides the focus ring. Someone who uses a keyboard instead of a mouse is now lost.
 
-### Step 9 — Bring it back, better
+### Step 12 — Bring it back, better
 
 Delete the `outline: none` rule. Then add:
 
@@ -189,9 +253,9 @@ Tab through the page again. **You should see:** a clear outline around each link
 
 ---
 
-## Part 5 — Run an audit
+## Part 6 — Run an audit
 
-### Step 10 — Lighthouse
+### Step 13 — Lighthouse
 
 1. Open your Live Server preview in its own Chrome tab.
 2. Right-click → **Inspect** → find the **Lighthouse** tab (it may be under `>>`).
@@ -217,6 +281,8 @@ Fix one item from the list and run it again.
 - [ ] I can explain what `:root` and `var()` do
 - [ ] Changing one variable changed the color everywhere
 - [ ] My spacing uses only the four scale sizes
+- [ ] No leftover margins on children of a grid or flex container
+- [ ] Images shrink with the window and keep their shape (no fixed `height`)
 - [ ] I checked a contrast ratio in DevTools
 - [ ] I can tab through the page and see where I am
 - [ ] I ran Lighthouse and fixed one thing
